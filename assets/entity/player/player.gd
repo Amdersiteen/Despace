@@ -4,7 +4,7 @@
 ## sur la physique et de la mise à jour de l'arbre d'animation en fonction 
 ## de la direction du mouvement.
 
-class_name Player
+class_name player
 extends CharacterBody2D
 
 ## Met en cache le nœud AnimationTree pour un accès rapide.
