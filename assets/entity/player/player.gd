@@ -4,51 +4,33 @@
 ## sur la physique et de la mise à jour de l'arbre d'animation en fonction 
 ## de la direction du mouvement.
 
-class_name player
 extends CharacterBody2D
+class_name player
 
 ## Met en cache le nœud AnimationTree pour un accès rapide.
 @onready var animation_tree: AnimationTree = $AnimationTree
 
-## Stocke la direction du mouvement du joueur.
-var direction: Vector2 = Vector2.ZERO
+# The instance of animation_strategie.
+var animate: animation_strategy
 
-## Vitesse constante à laquelle le joueur se déplace.
-const SPEED: float = 200.0
+# The instance of move_strategie.
+var move: move_strategy
 
-## Méthode d'initialisation, définit la direction initiale et met à jour les paramètres d'animation.
-func _ready() -> void:
-	direction.y = 1
-	_mettre_a_jour_parametre_animation()
-
-## Mouvement basé sur la physique et gestion de l'animation.
-##
-## @param delta: Le temps écoulé depuis la dernière image.
-func _physics_process(delta: float) -> void:
-	# Active l'arbre d'animation
-	animation_tree.active = true
+#Initialize the behaviour of the player
+func _init():
+	move = move_player_strategy.new()
+	animate = animation_player_strategy.new(animation_tree, move.direction)
 	
-	# Gère l'entrée pour le mouvement directionnel
-	direction.x = Input.get_axis("ui_left", "ui_right")
-	direction.y = Input.get_axis("ui_up", "ui_down")
+func _ready():
+	#if i don't explicitly call init the animation_tree is NULL
+	_init()
+	# Sets top-down collision setting, collisions will be reported as on_wall.
+	set_motion_mode ( MOTION_MODE_FLOATING )
 	
-	# Applique la vélocité en fonction de la direction ou décélérer si aucune direction n'est fournie
-	if direction:
-		velocity = direction * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.y = move_toward(velocity.y, 0, SPEED)
-	
-	# Normalise la vélocité et appliquer la vitesse
-	velocity = velocity.normalized() * SPEED
-	
-	# Met à jour l'arbre d'animation
-	_mettre_a_jour_parametre_animation()
+func _process(delta):
+	#execute the move strategie instanciate in the _init child of this class
+	velocity = move.execute_movement(delta, velocity)
+	animate.execute(move.direction)
 	
 	# Applique le mouvement
 	move_and_slide()
-
-## Met à jour le paramètre d'animation en fonction du vecteur de direction.
-func _mettre_a_jour_parametre_animation() -> void:
-	if direction != Vector2.ZERO:
-		animation_tree["parameters/Idle/blend_position"] = direction
