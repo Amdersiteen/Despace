@@ -10,27 +10,21 @@ class_name player
 ## Met en cache le nœud AnimationTree pour un accès rapide.
 @onready var animation_tree: AnimationTree = $AnimationTree
 
-# The instance of animation_strategie.
-var animate: animation_strategy
-
-# The instance of move_strategie.
-var move: move_strategy
-
-#Initialize the behaviour of the player
-func _init():
-	move = move_player_strategy.new()
-	animate = animation_player_strategy.new(animation_tree, move.direction)
+var animate_player: animate
+var move: move_player
 	
 func _ready():
-	#if i don't explicitly call init the animation_tree is NULL
-	_init()
 	# Sets top-down collision setting, collisions will be reported as on_wall.
 	set_motion_mode ( MOTION_MODE_FLOATING )
 	
+	#instance of the behaviour class
+	move = move_player.new()
+	animate_player = animate.new(animation_tree, move.direction)
+	
 func _process(delta):
 	#execute the move strategie instanciate in the _init child of this class
-	velocity = move.execute_movement(delta, velocity)
-	animate.execute(move.direction)
+	velocity = move.get_velocity(delta, velocity)
+	animate_player.execute_animation(move.direction)
 	
 	# Applique le mouvement
 	move_and_slide()

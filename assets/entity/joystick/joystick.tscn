@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://sahssxxh4ypa"]
+
+[ext_resource type="Texture2D" uid="uid://dgnptmt5cc2i2" path="res://assets/entity/joystick/Cercle interieur.png" id="1_xxoa4"]
+[ext_resource type="Texture2D" uid="uid://diew86acjodyq" path="res://assets/entity/joystick/Cercle exterieur.png" id="2_ceare"]
+
+[node name="joystick" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.352941)
+texture = ExtResource("1_xxoa4")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.352941)
+texture = ExtResource("2_ceare")
