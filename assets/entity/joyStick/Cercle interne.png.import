@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgnptmt5cc2i2"
-path="res://.godot/imported/Cercle interieur.png-dbebfde0bac07f0334208752f6f474c6.ctex"
+uid="uid://cbrixneg4v6cw"
+path="res://.godot/imported/Cercle interne.png-e89a18eabdd72f95d83c160ed24d422d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/entity/joystick/Cercle interieur.png"
-dest_files=["res://.godot/imported/Cercle interieur.png-dbebfde0bac07f0334208752f6f474c6.ctex"]
+source_file="res://assets/entity/joyStick/Cercle interne.png"
+dest_files=["res://.godot/imported/Cercle interne.png-e89a18eabdd72f95d83c160ed24d422d.ctex"]
 
 [params]
 

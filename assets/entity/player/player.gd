@@ -9,6 +9,7 @@ class_name player
 
 ## Met en cache le nœud AnimationTree pour un accès rapide.
 @onready var animation_tree: AnimationTree = $AnimationTree
+@onready var JoyStick = $"../JoyStik"
 
 var animate_player: animate
 var move: move_player
@@ -18,7 +19,7 @@ func _ready():
 	set_motion_mode ( MOTION_MODE_FLOATING )
 	
 	#instance of the behaviour class
-	move = move_player.new()
+	move = move_player.new(JoyStick)
 	animate_player = animate.new(animation_tree, move.direction)
 	
 func _process(delta):

@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://crxv6ktafv42x"]
+
+[ext_resource type="Texture2D" uid="uid://dgak6qjbtt4bc" path="res://assets/entity/joyStick/Cercle externe.png" id="1_cumxr"]
+[ext_resource type="Script" path="res://assets/entity/joyStick/joystik.gd" id="1_miwax"]
+[ext_resource type="Texture2D" uid="uid://cbrixneg4v6cw" path="res://assets/entity/joyStick/Cercle interne.png" id="2_x3pns"]
+[ext_resource type="Script" path="res://assets/entity/joyStick/knob.gd" id="3_1dmgy"]
+
+[node name="JoyStik" type="Node2D"]
+script = ExtResource("1_miwax")
+
+[node name="external cercle" type="Sprite2D" parent="."]
+texture = ExtResource("1_cumxr")
+
+[node name="knob" type="Sprite2D" parent="."]
+texture = ExtResource("2_x3pns")
+script = ExtResource("3_1dmgy")
+
+[node name="Button" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 256.0
+offset_bottom = 256.0
+
+[connection signal="button_down" from="Button" to="knob" method="_on_button_button_down"]
+[connection signal="button_up" from="Button" to="knob" method="_on_button_button_up"]

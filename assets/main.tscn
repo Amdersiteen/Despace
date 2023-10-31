@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://ea1ucrcq87ky"]
+
+[ext_resource type="PackedScene" uid="uid://3q0erb3p0x08" path="res://assets/entity/player/player.tscn" id="1_h7k7k"]
+[ext_resource type="PackedScene" uid="uid://crxv6ktafv42x" path="res://assets/entity/joyStick/joystik.tscn" id="2_671t6"]
+
+[node name="main" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_h7k7k")]
+position = Vector2(351, 193)
+
+[node name="JoyStik" parent="." instance=ExtResource("2_671t6")]
+position = Vector2(102, 535)
+scale = Vector2(0.255, 0.255)
