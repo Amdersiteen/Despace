@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkftjppr1msh2"]
+
+[ext_resource type="Script" path="res://InputControl.gd" id="1_cmvj5"]
+
+[node name="InputControl" type="Node2D"]
+script = ExtResource("1_cmvj5")

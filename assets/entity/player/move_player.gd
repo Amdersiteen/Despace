@@ -10,7 +10,6 @@ var strenght = 1
 const SPEED: float = 200.0 * 60
 
 func _init(_joy_stick: joystick):
-	print(_joy_stick)
 	if _joy_stick:
 		_joystick = _joy_stick
 
@@ -18,7 +17,7 @@ func _init(_joy_stick: joystick):
 func get_velocity(delta: float, _velocity: Vector2) -> Vector2:
 	# Gère l'entrée pour le mouvement directionnel
 
-	if _joystick :
+	if _joystick:
 		direction = _joystick.joystick_direction
 		strenght = _joystick.joystick_relative_strenght
 	else:

@@ -11,6 +11,8 @@ class_name player
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var JoyStick = $"../JoyStik"
 
+var _event: InputEvent
+
 var animate_player: animate
 var move: move_player
 	
@@ -29,3 +31,6 @@ func _process(delta):
 	
 	# Applique le mouvement
 	move_and_slide()
+	
+func _input(event):
+	_event = event
