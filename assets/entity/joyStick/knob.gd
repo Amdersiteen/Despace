@@ -17,7 +17,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
-	if 1:
+	if pressing:
 		joystick_lenght = min(parent.scale.x * 512 / 2, (parent.global_position).distance_to(get_global_mouse_position()))
 		joystick_relative_strenght = joystick_lenght / (parent.scale.x * 512 / 2)
 		joystick_direction =(parent.global_position).direction_to(get_global_mouse_position())
@@ -27,5 +27,10 @@ func _process(delta):
 		joystick_relative_strenght = 0
 		joystick_direction =Vector2.ZERO
 		
-func is_in_external_cercle():
-	pass
+
+func _on_touch_screen_button_pressed():
+	pressing = true
+
+
+func _on_touch_screen_button_released():
+	pressing = false
