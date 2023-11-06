@@ -18,6 +18,7 @@ func _ready():
 func _process(delta):
 	
 	if pressing:
+		print(get_global_mouse_position())
 		joystick_lenght = min(parent.scale.x * 512 / 2, (parent.global_position).distance_to(get_global_mouse_position()))
 		joystick_relative_strenght = joystick_lenght / (parent.scale.x * 512 / 2)
 		joystick_direction =(parent.global_position).direction_to(get_global_mouse_position())

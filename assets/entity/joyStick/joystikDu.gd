@@ -1,5 +1,5 @@
 extends move_strategie
-class_name joystick
+class_name joystickDu
 
 @onready var knob = $knob
 

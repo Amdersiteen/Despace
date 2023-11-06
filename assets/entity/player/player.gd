@@ -11,10 +11,13 @@ class_name player
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var JoyStick = $"../JoyStik"
 
-var _event: InputEvent
+## Vitesse constante à laquelle le personnage se déplace.
+const SPEED: float = 250.0 * 60
+
 
 var animate_player: animate
 var move: move_player
+#var move: move_manager
 	
 func _ready():
 	# Sets top-down collision setting, collisions will be reported as on_wall.
@@ -26,11 +29,15 @@ func _ready():
 	
 func _process(delta):
 	#execute the move strategie instanciate in the _init child of this class
-	velocity = move.get_velocity(delta, velocity)
-	animate_player.execute_animation(move.direction)
+	move.delta = delta
+	velocity = move.get_velocity()
 	
+	#velocity = move.direction * move.relative_strength * SPEED * delta
+	animate_player.execute_animation(move.direction)
 	# Applique le mouvement
 	move_and_slide()
 	
 func _input(event):
-	_event = event
+	print(event)
+	#move.compute_move(event)
+	move.set_velocity(velocity, event)
