@@ -1,5 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://3q0erb3p0x08"]
+[gd_scene load_steps=17 format=3 uid="uid://3q0erb3p0x08"]
 
+[ext_resource type="Script" path="res://assets/entity/player/player.gd" id="1_s857j"]
 [ext_resource type="Texture2D" uid="uid://bxvlss80rpsni" path="res://assets/entity/player/TX Player.png" id="2_nywp0"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qwon7"]
@@ -165,6 +166,7 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(267, 157)
+script = ExtResource("1_s857j")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -4)

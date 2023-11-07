@@ -1,34 +1,43 @@
 extends Node
 
-var joystick: Node2D
-var joyfac: joystik_fac
-var _event
-var touch
-	
+@onready var player = $Player
 
+# dict of the support input
+var input_support = {}
+
+var pressed = false
+
+var joystick_exist = false
+
+# Init the supported input media
 func _ready():
-	joystick = joystik_fac.new().get_joystick()
-	
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-		
-		
-	
-	#remove_child(joystick)
-	#print(_event)
+	input_support["joystick"] = joystick.new().get_joystick()
+	input_support["keyboard"] = move_keyboard.new()
 	
 func _input(event):
-	if event is InputEventScreenTouch:
-		print("ok")
-		var touch_event: InputEventScreenTouch
-		touch_event = event
-		print(touch_event.pressed)
-		if touch_event.pressed:
-			joystick.position = touch_event.position
-			add_child(joystick)
-		else:
-			remove_child(joystick)
-	#move.compute_move(event)
-	#move.set_velocity(velocity, event)
+	"""
+	manage the tactil
+	"""
+	if pressed:
+		input_support["joystick"].compute_event(self, event)
+					
+	else:
+		player.move = null
+		if joystick_exist:
+			remove_child(input_support["joystick"])
+			joystick_exist = false
+			
+	"""
+	manage le clavier
+	"""
+	if event is InputEventKey:
+		input_support["keyboard"].set_direction_and_strenght()
+		player.move = input_support["keyboard"]
+
+
+func _on_touch_screen_button_pressed():
+	pressed = true
+
+
+func _on_touch_screen_button_released():
+	pressed = false

@@ -1,3 +1,0 @@
-extends move_strategie
-
-
