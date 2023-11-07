@@ -23,17 +23,17 @@ func _ready():
 	animate_player = animate.new(animation_tree, Vector2(0, 1))
 	
 func _process(delta):
-	#execute the move strategie instanciate in the _init child of this class
+	# Execute the move strategie instanciate in the _init child of this class
 	if move:
-		# Updates the velocity based on the direction and relative strength of the move_trategie instance 
+		# Updates the Svelocity based on the direction and relative strength of the move_trategie instance 
 		velocity = move.direction * move.relative_strenght * SPEED / delta
 		
 		# Executes the animation based on the direction of the move
 		animate_player.execute_animation(move.direction)
 	else:
 		# If no move strategy is defined, the velocity is set to zero
-		velocity.x = 0#move_toward(velocity.x, 0, SPEED)
-		velocity.y = 0#move_toward(velocity.y, 0, SPEED)
+		velocity.x = 0 # move_toward(velocity.x, 0, SPEED)
+		velocity.y = 0 # move_toward(velocity.y, 0, SPEED)
 	
 	# Applique le mouvement
 	move_and_slide()

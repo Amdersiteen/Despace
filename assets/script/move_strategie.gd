@@ -1,4 +1,4 @@
-# a small template to assure compatibility in the player node 
+# A small template to assure compatibility in the player node 
 extends Node2D
 class_name move_strategie
 
