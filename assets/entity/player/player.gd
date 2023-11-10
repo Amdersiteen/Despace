@@ -24,7 +24,7 @@ func _ready():
 	# Instantiate supported input manager
 	input_support["joystick"] = joystick.new().get_joystick()
 	input_support["keyboard"] = move_keyboard.new()
-	input_support["joypad"] = null
+	input_support["joypad"] = move_joypad.new()
 	
 	# Creates an instance of the behaviour class
 	animate_player = animate.new(animation_tree, Vector2(0, 1))
@@ -32,15 +32,21 @@ func _ready():
 func _process(delta):
 	# Execute the move strategie instanciate in the _init child of this class
 	if move:
-		# Updates the Svelocity based on the direction and relative strength of the move_trategie instance 
-		velocity = move.direction * move.relative_strenght * SPEED / delta
+		# Updates the velocity based on the move scalar of the move_trategie instance 
+		velocity = move.move_scalar * SPEED / delta
 		
 		# Executes the animation based on the direction of the move
-		animate_player.execute_animation(move.direction)
-	else:
-		# If no move strategy is defined, the velocity is set to zero
-		velocity.x = 0 # move_toward(velocity.x, 0, SPEED)
-		velocity.y = 0 # move_toward(velocity.y, 0, SPEED)
+		animate_player.execute_animation(move.move_scalar)
+	elif velocity != Vector2.ZERO:
+		# If no move strategy is defined, the velocity decelerate
+		velocity.x = move_toward(velocity.x, 0, SPEED) / 1.1
+		velocity.y = move_toward(velocity.y, 0, SPEED) / 1.1
 	
 	# Applique le mouvement
 	move_and_slide()
+	
+func manage_event(_node: Node = null, event: InputEvent = null, button = false):
+	for supported in self.input_support.values():
+		if event.get_class() in supported.event_class_support:
+			supported.process_input_event(_node, event, button)
+			return
