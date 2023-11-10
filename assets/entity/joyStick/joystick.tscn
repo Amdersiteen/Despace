@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvlelexb3rtei"]
+
+[ext_resource type="Texture2D" uid="uid://cbrixneg4v6cw" path="res://assets/entity/joystick/Cercle interne.png" id="1_0fu37"]
+[ext_resource type="Script" path="res://assets/entity/joystick/joystick.gd" id="1_m2d21"]
+
+[node name="joystick" type="Node2D"]
+script = ExtResource("1_m2d21")
+
+[node name="knob" type="Sprite2D" parent="."]
+texture = ExtResource("1_0fu37")

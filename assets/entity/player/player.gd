@@ -12,12 +12,19 @@ class_name player
 ## Vitesse constante à laquelle le personnage se déplace.
 const SPEED: float = 200.0 / 60
 
+var input_support = {}
+
 var animate_player: animate
 var move: move_strategie
 	
 func _ready():
 	# Sets top-down collision setting, collisions will be reported as on_wall.
 	set_motion_mode ( MOTION_MODE_FLOATING )
+	
+	# Instantiate supported input manager
+	input_support["joystick"] = joystick.new().get_joystick()
+	input_support["keyboard"] = move_keyboard.new()
+	input_support["joypad"] = null
 	
 	# Creates an instance of the behaviour class
 	animate_player = animate.new(animation_tree, Vector2(0, 1))

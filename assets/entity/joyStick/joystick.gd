@@ -23,32 +23,33 @@ func set_knob_position():
 	
 func get_joystick() -> Node2D:
 	# Load and instantiate the joystick node from a file.
-	joystick_node = load("res://assets/entity/joyStick/joystik.tscn").instantiate()
+	joystick_node = load("res://assets/entity/joystick/joystick.tscn").instantiate()
 	joystick_node.apply_scale(Vector2(0.2, 0.2))
 	return joystick_node
 	
 func process_input_event(_node: Node, event: InputEvent):
+	var player = _node.player
 	if event is InputEventScreenTouch:
 		if event.pressed:
-			_node.input_support["joystick"].position = event.position
+			self.position = event.position
 
 	if event is InputEventScreenDrag:
 			if !joystick_exist :
 				# Add the joystick as a child of the node if it doesn't exist and mark its existence.
-				_node.add_child(_node.input_support["joystick"])
+				_node.add_child(self)
 				joystick_exist = true
 				
 			# Update the joystick's direction and strength, and knob's position during drag.
-			_node.input_support["joystick"].set_direction_and_strenght(event.position)
-			_node.input_support["joystick"].set_knob_position()
+			self.set_direction_and_strenght(event.position)
+			self.set_knob_position()
 			
-			if !_node.player.move is joystick:
+			if !player.move is joystick:
 				# Set the player's move to the joystick if not already set.
-				_node.player.move = _node.input_support["joystick"]
+				player.move = self
 				
 func destroy(_node: Node):
 		# Set the player's move to null and remove the joystick if it exists.
 		_node.player.move = null
 		if joystick_exist:
-			_node.remove_child(_node.input_support["joystick"])
+			_node.remove_child(self)
 			joystick_exist = false
