@@ -4,7 +4,7 @@ extends Node
 @onready var player = $Player
 
 # Flag to track if a touch screen button is pressed
-var pressed = false
+var pressed = true
 
 # Handle input events
 func _input(event):
