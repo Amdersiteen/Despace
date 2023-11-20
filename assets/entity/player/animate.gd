@@ -1,5 +1,5 @@
 # This class manage animations.
-class_name animate
+class_name Animate
 
 # A reference to the AnimationTree node.
 var animation_tree: AnimationTree
