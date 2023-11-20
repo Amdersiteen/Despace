@@ -2,6 +2,7 @@
 extends move_strategie
 class_name move_keyboard
 
+# You need to add the input event class name to the event_class_support so the event trigger this class
 func _init():
 	event_class_support.append("InputEventKey")
 		
