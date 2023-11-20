@@ -22,9 +22,9 @@ func _ready():
 	set_motion_mode ( MOTION_MODE_FLOATING )
 	
 	# Instantiate supported input manager
-	input_support["joystick"] = joystick.new().get_joystick()
 	input_support["keyboard"] = move_keyboard.new()
 	input_support["joypad"] = joypad.new()
+	input_support["joystick"] = joystick.new().get_new_joystick() # joystick need to be a node2D instance so you can see it on the screen
 	
 	# Creates an instance of the animate class
 	animate_player = animate.new(animation_tree, Vector2(0, 1))
@@ -38,8 +38,8 @@ func _process(delta):
 		# Executes the animation based on the direction of the move
 		animate_player.execute_animation(move.move_scalar)
 
-	if velocity != Vector2.ZERO:
-		# If no move strategy is defined, the velocity decelerate
+	elif velocity != Vector2.ZERO:
+		# the velocity decelerate if move is null 
 		velocity.x = move_toward(velocity.x, 0, SPEED) / 1.1
 		velocity.y = move_toward(velocity.y, 0, SPEED) / 1.1
 	
@@ -52,6 +52,3 @@ func manage_event(_node: Node = null, event: InputEvent = null, button = false):
 		if event.get_class() in supported.event_class_support:
 			supported.process_input_event(_node, event, button)
 			return
-"	if (!_node.player.move is joystick) and _node.player.move:
-		move.move_scalar[0] = move_toward(move.move_scalar[0], 0, SPEED) / 1.1
-		move.move_scalar[1] = move_toward(move.move_scalar[1], 0, SPEED) / 1.1"

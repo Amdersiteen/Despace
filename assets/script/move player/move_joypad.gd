@@ -30,8 +30,6 @@ class joypad_motion:
 			_scalar[1] = 0
 			
 		return _scalar
-	
-
 			
 var joypads_motion = {}
 		

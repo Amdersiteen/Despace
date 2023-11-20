@@ -8,7 +8,7 @@ var joystick_exist = false
 
 var parent_size = 512
 
-# add the event input class name to the supported class of this class
+# Add the supported event input class name to the supported class list of this class
 func _init():
 	event_class_support.append("InputEventScreenDrag")
 	event_class_support.append("InputEventScreenTouch")
@@ -26,7 +26,7 @@ func set_knob_position():
 	# Update the knob's global position based on the direction and joystick length.
 	knob.global_position = move_scalar * (scale.x * parent_size / 2) + global_position
 	
-func get_joystick() -> Node2D:
+func get_new_joystick() -> Node2D:
 	# Load and instantiate the joystick node from a file.
 	joystick_node = load("res://assets/entity/joystick/joystick.tscn").instantiate()
 	joystick_node.apply_scale(Vector2(0.2, 0.2))
