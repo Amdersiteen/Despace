@@ -24,14 +24,14 @@ var animate_player: Animate
 var move: MoveStrategy
 	
 func _ready():
-	# Sets top-down collision setting, collisions will be reported as on_wall.
+	# Sets top-down collision setting, collisions will be reported as on_wall for the player node.
 	set_motion_mode ( MOTION_MODE_FLOATING )
 	
 	# Instantiates supported input managers.
 	input_support["keyboard"] = MoveKeyboard.new()
 	input_support["joypad"] = Joypad.new()
 	input_support["joystick"] = Joystick.new().get_new_joystick() # Joystick needs to be a Node2D instance to be visible on the screen
-	
+	input_support["joystick"].event_class_support.append("InputEventScreenDrag")
 	# Creates an instance of the Animate class.
 	animate_player = Animate.new(animation_tree, Vector2(0, 1))
 	
@@ -39,7 +39,7 @@ func _process(delta):
 	# Use the move strategy instantiated by the manage_event method.
 	if move:
 		# Updates the velocity based on the move scalar of the MoveStrategy instance.
-		velocity = move.move_scalar * SPEED / delta
+		velocity = move.get_move_scalar() * SPEED / delta
 		
 		# Executes the animation based on the direction of the move
 		animate_player.execute_animation(move.move_scalar)

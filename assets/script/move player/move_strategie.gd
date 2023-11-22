@@ -10,3 +10,6 @@ var event_class_support = []
 # Method to process input events and update the move_scalar accordingly.
 func process_input_event(_node: Node = null, event: InputEvent = null):
 	pass
+	
+func get_move_scalar() -> Vector2:
+	return move_scalar.limit_length(1)
