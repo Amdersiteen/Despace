@@ -16,3 +16,6 @@ func process_input_event(_node: Node = null, event: InputEvent = null):
 		move_scalar.x = Input.get_axis("ui_left", "ui_right")
 		move_scalar.y = Input.get_axis("ui_up", "ui_down")
 		move_scalar = move_scalar.limit_length(1)
+		
+		if move_scalar == Vector2.ZERO:
+			_node.player.move = null

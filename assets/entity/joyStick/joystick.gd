@@ -11,6 +11,8 @@ var joystick_node: Node2D
 # Flag to track the existence of the joystick node
 var joystick_exist: bool = false
 
+@export var joystick_scale = Vector2(0.2, 0.2)
+
 # Size of the parent node
 var parent_size: int = 512
 
@@ -23,7 +25,7 @@ func _init():
 func get_new_joystick() -> Node2D:
 	# Load and instantiate the joystick node from a file.
 	joystick_node = load("res://assets/entity/joystick/joystick.tscn").instantiate()
-	joystick_node.apply_scale(Vector2(0.2, 0.2))
+	joystick_node.apply_scale(joystick_scale)
 	return joystick_node
 
 # Set the move_scalar based on the event position position

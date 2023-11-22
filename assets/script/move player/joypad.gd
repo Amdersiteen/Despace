@@ -13,6 +13,7 @@ func _init():
 func process_input_event(_node: Node = null, event: InputEvent = null):
 	# If the joypad event is the one that can move the player
 	if event.axis in player_joypad:
+		print(event)
 		# Filter the axis value so small unwanted movements of the joypad don't trigger a move or a direction change in the animation
 		if event.axis_value * event.axis_value > 0.22 * 0.22:
 			move_scalar[event.axis % 2] = event.axis_value
