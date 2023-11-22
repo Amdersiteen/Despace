@@ -14,7 +14,7 @@ position = Vector2(351, 193)
 [node name="TouchScreenButton" type="TouchScreenButton" parent="."]
 self_modulate = Color(1, 1, 1, 0.992157)
 position = Vector2(570, 324)
-scale = Vector2(43.352, 24.01)
+scale = Vector2(50.312, 24.25)
 shape = SubResource("RectangleShape2D_1i23f")
 
 [connection signal="pressed" from="TouchScreenButton" to="." method="_on_touch_screen_button_pressed"]
