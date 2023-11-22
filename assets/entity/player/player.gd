@@ -15,7 +15,7 @@ class_name Player
 const SPEED: float = 200.0 / 60
 
 # Dictionary to store different input strategy instances.
-var input_support = {}
+var input_support = []
 
 # Instance of the Animate class for handling animations.
 var animate_player: Animate
@@ -28,10 +28,10 @@ func _ready():
 	set_motion_mode ( MOTION_MODE_FLOATING )
 	
 	# Instantiates supported input managers.
-	input_support["keyboard"] = MoveKeyboard.new()
-	input_support["joypad"] = Joypad.new()
-	input_support["joystick"] = Joystick.new().get_new_joystick() # Joystick needs to be a Node2D instance to be visible on the screen
-	input_support["joystick"].event_class_support.append("InputEventScreenDrag")
+	input_support.append(MoveKeyboard.new())
+	input_support.append(Joypad.new())
+	input_support.append(Joystick.new().get_new_joystick()) # Joystick needs to be a Node2D instance to be visible on the screen
+
 	# Creates an instance of the Animate class.
 	animate_player = Animate.new(animation_tree, Vector2(0, 1))
 	
@@ -54,7 +54,7 @@ func _process(delta):
 	
 func manage_event(_node: Node = null, event: InputEvent = null):
 	# Looks for a manager that can process the event.
-	for supported in self.input_support.values():
+	for supported in input_support:
 		if event.get_class() in supported.event_class_support:
 			supported.process_input_event(_node, event)
 			return

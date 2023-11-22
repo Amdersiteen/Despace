@@ -7,6 +7,7 @@ func _init():
 	# Initialization method to set up event class support.
 	event_class_support.append("InputEventKey")
 		
+
 # Process input events and update move_scalar accordingly.
 func process_input_event(_node: Node = null, event: InputEvent = null):
 		# Set the move strategy for the player node

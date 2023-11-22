@@ -18,7 +18,7 @@ var parent_size: int = 512
 
 # Add the supported event input class name to the supported class list of this class
 func _init():
-	#event_class_support.append("InputEventScreenDrag")
+	event_class_support.append("InputEventScreenDrag")
 	event_class_support.append("InputEventScreenTouch")
 	
 # Instantiate and return a new joystick node
