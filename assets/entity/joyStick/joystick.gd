@@ -1,5 +1,5 @@
 # Manage the knob position relative to the joystic position and update the move_scalar that is needed for the player movement
-extends MoveStrategy
+extends Node2D
 class_name Joystick
 
 # Reference to the knob node
@@ -15,6 +15,11 @@ var joystick_exist: bool = false
 
 # Size of the parent node
 var parent_size: int = 512
+
+# Vector representing the movement direction, limited to a maximum magnitude of 1.
+var move_scalar: Vector2
+# List of input event classes supported by this move strategy.
+var event_class_support = []
 
 # Add the supported event input class name to the supported class list of this class
 func _init():
@@ -53,14 +58,13 @@ func process_input_event(_node: Node = null, event: InputEvent = null):
 				self.set_move_scalar(event.position)
 				# Update the knob's global position based on the direction and joystick length.
 				knob.global_position = move_scalar * (scale.x * parent_size / 2) + global_position
+				Input.action_press("ui_right", move_scalar[0])
+				Input.action_press("ui_down", move_scalar[1])
 				
-				var player = _node.player
-				if !player.move is Joystick:
-					# Set the player's move to the joystick if not already set.
-					player.move = self
 	else:
-		# Set the player's move to null and remove the joystick if it exists.
-		_node.player.move = null
+		Input.action_press("ui_right", 0)
+		Input.action_press("ui_down", 0)
+		# remove the joystick if it exists.
 		if joystick_exist:
 			_node.remove_child(self)
 			joystick_exist = false

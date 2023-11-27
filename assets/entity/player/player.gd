@@ -13,48 +13,28 @@ class_name Player
 
 # Vitesse constante à laquelle le personnage se déplace.
 const SPEED: float = 200.0 / 60
-
-# Dictionary to store different input strategy instances.
-var input_support = []
+const GRAVITY: float = 1.1
 
 # Instance of the Animate class for handling animations.
 var animate_player: Animate
-
-# Instance of the currently active MoveStrategy for player movement.
-var move: MoveStrategy
 	
 func _ready():
 	# Sets top-down collision setting, collisions will be reported as on_wall for the player node.
 	set_motion_mode ( MOTION_MODE_FLOATING )
-	
-	# Instantiates supported input managers.
-	input_support.append(MoveKeyboard.new())
-	input_support.append(Joypad.new())
-	input_support.append(Joystick.new().get_new_joystick()) # Joystick needs to be a Node2D instance to be visible on the screen
 
 	# Creates an instance of the Animate class.
 	animate_player = Animate.new(animation_tree, Vector2(0, 1))
 	
 func _process(delta):
-	# Use the move strategy instantiated by the manage_event method.
-	if move:
-		# Updates the velocity based on the move scalar of the MoveStrategy instance.
-		velocity = move.get_move_scalar() * SPEED / delta
-		
+	# Updates the velocity and animation based on the user input if there is a input else decelerates if the player still move.
+	if !(Input.get_axis("ui_left", "ui_right") == 0 and Input.get_axis("ui_up", "ui_down") == 0):
+		velocity = Vector2(Input.get_axis("ui_left", "ui_right"), Input.get_axis("ui_up", "ui_down")).limit_length(1) * SPEED / delta
 		# Executes the animation based on the direction of the move
-		animate_player.execute_animation(move.move_scalar)
-
-	elif velocity != Vector2.ZERO:
+		animate_player.execute_animation(velocity.normalized())
+	elif  velocity != Vector2.ZERO:
 		# The velocity decelerates if move is null.
-		velocity.x = move_toward(velocity.x, 0, SPEED) / 1.1
-		velocity.y = move_toward(velocity.y, 0, SPEED) / 1.1
+		velocity.x = move_toward(velocity.x, 0, SPEED) / GRAVITY
+		velocity.y = move_toward(velocity.y, 0, SPEED) / GRAVITY
 	
 	# Applique le mouvement
 	move_and_slide()
-	
-func manage_event(_node: Node = null, event: InputEvent = null):
-	# Looks for a manager that can process the event.
-	for supported in input_support:
-		if event.get_class() in supported.event_class_support:
-			supported.process_input_event(_node, event)
-			return
