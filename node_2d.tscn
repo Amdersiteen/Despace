@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c8bi7xq1gqc3o"]
 
-[ext_resource type="Script" path="res://assets/main.gd" id="1_vrfqi"]
+[ext_resource type="Script" path="res://assets/base dinamic joystic scene.gd" id="1_vrfqi"]
 [ext_resource type="PackedScene" uid="uid://3q0erb3p0x08" path="res://assets/entity/player/player.tscn" id="2_gd1ke"]
 
 [node name="Node2D" type="Node2D"]

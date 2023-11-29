@@ -8,12 +8,15 @@
 extends CharacterBody2D
 class_name Player
 
+var player_direction = {"up": Vector2(0, -1), "down": Vector2(0, 1), "right": Vector2(1, 0), "left": Vector2(-1, 0)}
+
 # Met en cache le nœud AnimationTree pour un accès rapide.
 @onready var animation_tree: AnimationTree = $AnimationTree
 
 # Vitesse constante à laquelle le personnage se déplace.
-const SPEED: float = 200.0 / 60
-const GRAVITY: float = 1.1
+@export var SPEED: float = 200.0 / 60
+@export var FRICTION: float = 10
+@export var player_init_direction: String = "up"
 
 # Instance of the Animate class for handling animations.
 var animate_player: Animate
@@ -23,7 +26,7 @@ func _ready():
 	set_motion_mode ( MOTION_MODE_FLOATING )
 
 	# Creates an instance of the Animate class.
-	animate_player = Animate.new(animation_tree, Vector2(0, 1))
+	animate_player = Animate.new(animation_tree, player_direction[player_init_direction])
 	
 func _process(delta):
 	# Updates the velocity and animation based on the user input if there is a input else decelerates if the player still move.
@@ -33,8 +36,11 @@ func _process(delta):
 		animate_player.execute_animation(velocity.normalized())
 	elif  velocity != Vector2.ZERO:
 		# The velocity decelerates if move is null.
-		velocity.x = move_toward(velocity.x, 0, SPEED) / GRAVITY
-		velocity.y = move_toward(velocity.y, 0, SPEED) / GRAVITY
+		if velocity.length() < 10:
+			velocity = Vector2.ZERO
+		else:
+			velocity = velocity.limit_length(velocity.length() - velocity.length() * FRICTION / 100)
+			
 	
 	# Applique le mouvement
 	move_and_slide()

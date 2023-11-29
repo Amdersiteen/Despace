@@ -1,4 +1,5 @@
 extends Node
+class_name BaseDinamicJoystickScene
 
 # Reference to the Player node
 @onready var player = $Player

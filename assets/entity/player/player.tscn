@@ -167,6 +167,7 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(267, 157)
 script = ExtResource("1_s857j")
+player_init_direction = "right"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -4)
