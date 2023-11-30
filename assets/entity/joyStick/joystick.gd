@@ -2,15 +2,13 @@
 extends Node2D
 class_name Joystick
 
-# Reference to the knob node
 @onready var knob = $knob
-
-# Reference to the joystick node
 var joystick_node: Node2D
 
 # Flag to track the existence of the joystick node
 var joystick_exist: bool = false
 
+# Scale of the joystick in the scene
 @export var joystick_scale = Vector2(0.2, 0.2)
 
 # Size of the parent node
@@ -18,6 +16,7 @@ var parent_size: int = 512
 
 # Vector representing the movement direction, limited to a maximum magnitude of 1.
 var move_scalar: Vector2
+
 # List of input event classes supported by this move strategy.
 var event_class_support = []
 
@@ -58,12 +57,16 @@ func process_input_event(_node: Node = null, event: InputEvent = null):
 				self.set_move_scalar(event.position)
 				# Update the knob's global position based on the direction and joystick length.
 				knob.global_position = move_scalar * (scale.x * parent_size / 2) + global_position
+				
+				# Press UI actions based on move_scalar components
 				Input.action_press("ui_right", move_scalar[0])
 				Input.action_press("ui_down", move_scalar[1])
 				
 	else:
+		# Reset UI actions when not pressed
 		Input.action_press("ui_right", 0)
 		Input.action_press("ui_down", 0)
+		
 		# remove the joystick if it exists.
 		if joystick_exist:
 			_node.remove_child(self)

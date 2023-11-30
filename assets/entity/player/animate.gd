@@ -8,7 +8,6 @@ var animation_tree: AnimationTree
 func _init(_animation_tree: AnimationTree, _direction: Vector2):
 	animation_tree = _animation_tree
 	if animation_tree != null:
-		# Active l'arbre d'animation
 		animation_tree.active = true
 		update_animation(_direction)
 
