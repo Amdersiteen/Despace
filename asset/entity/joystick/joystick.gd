@@ -28,7 +28,7 @@ func _init():
 # Instantiate and return a new joystick node
 func get_new_joystick() -> Node2D:
 	# Load and instantiate the joystick node from a file.
-	joystick_node = load("res://assets/entity/joystick/joystick.tscn").instantiate()
+	joystick_node = load("res://asset/entity/joystick/joystick.tscn").instantiate()
 	joystick_node.apply_scale(joystick_scale)
 	return joystick_node
 

@@ -1,7 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://3q0erb3p0x08"]
+[gd_scene load_steps=17 format=3 uid="uid://b4y38e676lyqy"]
 
-[ext_resource type="Script" path="res://assets/entity/player/player.gd" id="1_6n53r"]
-[ext_resource type="Texture2D" uid="uid://bxvlss80rpsni" path="res://assets/entity/player/TX Player.png" id="2_nywp0"]
+[ext_resource type="Script" path="res://asset/entity/player/player.gd" id="1_jjgty"]
+[ext_resource type="Texture2D" uid="uid://cc8eilf8e476q" path="res://asset/entity/player/TX Player.png" id="2_2nh8g"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qwon7"]
 height = 54.0
@@ -166,12 +166,13 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(267, 157)
-script = ExtResource("1_6n53r")
+script = ExtResource("1_jjgty")
+player_init_direction = "right"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -4)
 scale = Vector2(1, 1.125)
-texture = ExtResource("2_nywp0")
+texture = ExtResource("2_2nh8g")
 flip_h = true
 hframes = 4
 vframes = 2

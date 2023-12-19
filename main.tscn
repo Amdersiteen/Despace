@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://ci0uh5wyfa4kk"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_02a64"]
+[ext_resource type="PackedScene" uid="uid://b4y38e676lyqy" path="res://asset/entity/player/player.tscn" id="2_40dab"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8wwyp"]
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_02a64")
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+position = Vector2(523, 297)
+scale = Vector2(-38.1675, -20.2103)
+shape = SubResource("RectangleShape2D_8wwyp")
+
+[node name="Player" parent="." instance=ExtResource("2_40dab")]
+position = Vector2(290, 326)
+
+[connection signal="pressed" from="TouchScreenButton" to="." method="_on_touch_screen_button_pressed"]
+[connection signal="released" from="TouchScreenButton" to="." method="_on_touch_screen_button_released"]

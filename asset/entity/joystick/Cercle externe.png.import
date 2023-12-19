@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgak6qjbtt4bc"
-path="res://.godot/imported/Cercle externe.png-5901f93c0a546568dc742bed3325d7c3.ctex"
+uid="uid://b34aabx2qahmg"
+path="res://.godot/imported/Cercle externe.png-62176350e903b77dabddf6c39a50a926.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/entity/joystick/Cercle externe.png"
-dest_files=["res://.godot/imported/Cercle externe.png-5901f93c0a546568dc742bed3325d7c3.ctex"]
+source_file="res://asset/entity/joystick/Cercle externe.png"
+dest_files=["res://.godot/imported/Cercle externe.png-62176350e903b77dabddf6c39a50a926.ctex"]
 
 [params]
 
