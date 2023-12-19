@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://assets/entity/joystick/joystick.gd" id="1_m2d21"]
 [ext_resource type="Texture2D" uid="uid://dgak6qjbtt4bc" path="res://assets/entity/joystick/Cercle externe.png" id="3_eq6sk"]
 
+
 [node name="joystick" type="Node2D"]
 script = ExtResource("1_m2d21")
 
